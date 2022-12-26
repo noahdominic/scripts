@@ -5,13 +5,17 @@ mkdir $HOME/dev
 mkdir $HOME/Documents
 mkdir $HOME/Downloads
 
+# Setup ZSH
+pkg install zsh
+chsh -s $(which zsh)
+
 # Install text editors
-pkg install vim --yes
-pkg install nano --yes
+pkg install -y vim
+pkg install -y nano
 
 # Install dev tools
-pkg install cmake --yes
-pkg install rust --yes
-pkg install python --yes
-pkg install editors/vscode --yes
+pkg install -y cmake
+pkg install -y rust
+pkg install -y python
+pkg install -y editors/vscode
 
