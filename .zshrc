@@ -5,7 +5,7 @@
 
 # ZSH plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt autocd
 
 # Aliases for general convenience
@@ -20,9 +20,9 @@ setopt autocd
 # Load gnome-text-editor as gedit
 	alias gedit='gnome-text-editor'
 # Shortcut aliases for LIST
-	alias ls='ls --group-directories-first --color=auto'
-	alias lh='ls -lh'
-	alias la='lh -a'
+	alias ls='ls -G'
+	alias ll='ls -lGh'
+	alias la='ls -lahG'
 # Make a new dir $name and cd into $name
 mkcd ()
 {
