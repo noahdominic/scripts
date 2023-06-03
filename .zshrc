@@ -39,9 +39,8 @@ switch ()
 	alias cls='clear'
 # Fix for common typos
 	alias 'cd..'='cd ..'
-# Aliases for special directories
-	alias journal='cd ~/journal/'
 # Aliases for journaling
+	alias journal='cd ~/journal/'
 	alias today="echo $(date +'%Y/%m/%d')"
 	alias inittoday=~/journal/inittoday
 	alias nanotoday="nano ~/journal/$(today)"
