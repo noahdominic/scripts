@@ -41,7 +41,6 @@ switch ()
 	alias 'cd..'='cd ..'
 # Aliases for special directories
 	alias journal='cd ~/journal/'
-	alias dev='cd ~/dev/'
 # Aliases for journaling
 	alias today="echo $(date +'%Y/%m/%d')"
 	alias inittoday=~/journal/inittoday
