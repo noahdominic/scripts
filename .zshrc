@@ -83,8 +83,8 @@ git checkout playground
 }
 
 # Aliases for cargo
-	alias ccheck="cargo check"
-	alias crun="cargo run"
+type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
+type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
 # Lines forring zsh histories
 	HISTFILE=~/.zsh_histfile
