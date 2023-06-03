@@ -78,10 +78,10 @@ for branch in "$@"; do
   # Checkout the branch
   git checkout "$branch" && git rebase playground
 done
-
 # Return to the original branch
 git checkout playground
 }
+
 # Aliases for cargo
 	alias ccheck="cargo check"
 	alias crun="cargo run"
