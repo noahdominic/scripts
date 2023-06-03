@@ -48,7 +48,7 @@ switch ()
 	alias vimtoday="vim ~/journal/$(today)"
 	alias showtoday="cat ~/journal/$(today)"
 # Aliases for Jekyll [JEKYLL REQUIRED]
-	alias 'bejs'='bundle exec jekyll serve'
+	type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
 # Aliases for TeX & related software [TEX REQUIRED]
 	alias tectonic-build='tectonic main.tex -o out/'
 # Aliases for make & CMake [MAKE & CMAKE REQUIRED]
