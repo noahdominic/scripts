@@ -58,7 +58,6 @@ switch ()
 	alias gcommit='git commit'
 	alias gcm='gc -m'
 	alias gcam='gc -am'
-	alias gp='git push'
 	alias gpush='git push'
 	alias gstat='git status'
 	alias ghash='git hash-object -w'
