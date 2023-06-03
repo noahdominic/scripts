@@ -13,8 +13,6 @@ setopt autocd
 	alias please='sudo !!'
 # Open .zshrc on nano THEN automatically load it
 	alias zshrc='nano ~/.zshrc && source ~/.zshrc'
-# Refrash user and system font caches
-	alias refreshfontcaches='fc-cache -fv && sudo fc-cache -fv'	
 # Load gnome-text-editor as gedit
 	alias gedit='gnome-text-editor'
 # Shortcut aliases for LIST
