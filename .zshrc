@@ -8,6 +8,12 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt autocd
 
+# Lines forring zsh histories
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory
+
 # Functions for general convenience
 # Make a new dir $name and cd into $name
 mkcd ()
@@ -86,11 +92,6 @@ git checkout playground
 type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
-# Lines forring zsh histories
-	HISTFILE=~/.zsh_histfile
-	HISTSIZE=1000
-	SAVEHIST=1000
-	setopt appendhistory
 
 # PS1 for ZSH
 	function parse_git_branch () {
