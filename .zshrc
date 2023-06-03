@@ -14,6 +14,17 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
 
+# PS1 for ZSH
+	function parse_git_branch () {
+	  # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+	  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)\ /'
+	}
+	setopt PROMPT_SUBST
+	PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
+
+# Path env var
+	export PATH=$HOME/bin:$PATH
+
 # Functions for general convenience
 # Make a new dir $name and cd into $name
 mkcd ()
@@ -93,16 +104,6 @@ type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
 
-# PS1 for ZSH
-	function parse_git_branch () {
-	  # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-	  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)\ /'
-	}
-	setopt PROMPT_SUBST
-	PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
-
-# Path env var
-	export PATH=$HOME/bin:$PATH
 
 # Prerequisite configs for Jekyll
 	export GEM_HOME='~/gems'
