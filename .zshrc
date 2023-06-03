@@ -47,9 +47,6 @@ switch ()
 	alias gedittoday="gnome-text-editor ~/journal/$(today)"
 	alias vimtoday="vim ~/journal/$(today)"
 	alias showtoday="cat ~/journal/$(today)"
-# Aliases for scripts in $HOME/scripts
-	alias find-all-liberation-fonts="$HOME/scripts/find-all-liberation-fonts.sh"
-	alias delete-all-liberation-fonts="$HOME/scripts/delete-all-liberation-fonts.sh"
 # Aliases for Jekyll [JEKYLL REQUIRED]
 	alias 'bejs'='bundle exec jekyll serve'
 # Aliases for TeX & related software [TEX REQUIRED]
