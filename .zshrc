@@ -8,15 +8,7 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt autocd
 
-# Aliases for general convenience
-# Run previous command as `sudo`
-	alias please='sudo !!'
-# Open .zshrc on nano THEN automatically load it
-	alias zshrc='nano ~/.zshrc && source ~/.zshrc'
-# Shortcut aliases for LIST
-	alias ls='ls -G'
-	alias ll='ls -lGh'
-	alias la='ls -lahG'
+# Functions for general convenience
 # Make a new dir $name and cd into $name
 mkcd ()
 {
@@ -33,6 +25,16 @@ switch ()
 	mv "$file2" "$file1"
 	mv "$temp_file" "$file2"
 }
+
+# Aliases for general convenience
+# Run previous command as `sudo`
+	alias please='sudo !!'
+# Open .zshrc on nano THEN automatically load it
+	alias zshrc='nano ~/.zshrc && source ~/.zshrc'
+# Shortcut aliases for LIST
+	alias ls='ls -G'
+	alias ll='ls -lGh'
+	alias la='ls -lahG'
 # Windows-isms
 	alias cls='clear'
 # Fix for common typos
