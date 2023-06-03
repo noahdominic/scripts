@@ -49,8 +49,6 @@ switch ()
 	alias showtoday="cat ~/journal/$(today)"
 # Aliases for Jekyll [JEKYLL REQUIRED]
 	type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
-# Aliases for TeX & related software [TEX REQUIRED]
-	alias tectonic-build='tectonic main.tex -o out/'
 # Aliases for make & CMake [MAKE & CMAKE REQUIRED]
 	alias cmake-build='cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug'
 # Aliases for git [GIT REQUIRED]
