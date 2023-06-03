@@ -114,23 +114,6 @@ type cargo >/dev/null 2>&1 && alias crun="cargo run"
 	bindkey "^[[1;5C" forward-word
 	bindkey "^[[1;5D" backward-word
 
-function download-playlist() {
-    if [[ -n "$1" ]]; then
-        touch ./files.txt;
-        counter=1;
-        while read line; do
-            if [[ "$line" == "http"* ]]; then
-                curl --silent -o ${counter}.mp4 "$line";
-                echo "file ${counter}.mp4" >> ./files.txt;
-                ((counter++));
-            fi;
-        done < "$1";
-        ffmpeg -f concat -safe 0 -i ./files.txt -codec copy output.mp4;
-    else
-        echo 'Usage: download-playlist <file.m3u8>';
-    fi
-}
-
 backup() {
     original_path="$1"
     archive_path="$2"
