@@ -103,8 +103,6 @@ git checkout playground
 type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
-
-
 # Prerequisite configs for Jekyll
 	export GEM_HOME='~/gems'
 	export PATH=$HOME/gems/bin:/home/noahdominic/.cargo/bin:$PATH
