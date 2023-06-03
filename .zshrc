@@ -11,8 +11,6 @@ setopt autocd
 # Aliases for general convenience
 # Run previous command as `sudo`
 	alias please='sudo !!'
-# Open /usr/share/fonts on nautilus as sudo
-	alias opensysfonts='sudo nautilus /usr/share/fonts'
 # Open .zshrc on nano THEN automatically load it
 	alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Refrash user and system font caches
