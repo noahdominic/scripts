@@ -44,8 +44,6 @@ switch ()
 }
 
 # Aliases for general convenience
-# Run previous command as `sudo`
-alias please='sudo !!'
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
