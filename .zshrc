@@ -3,6 +3,9 @@
 # Note: This version was created for a workstation running on Fedora 36. 
 #       Things may need to be modified to fit your system.
 
+# Enable colourised output for CLI
+export CLICOLOR=1
+
 # ZSH plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -47,11 +50,6 @@ switch ()
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
-if ls --color >/dev/null 2>&1; then
-  alias ls='ls --color=auto'
-else
-  alias ls='ls -G'
-fi
 alias ll='ls -lGh'
 alias la='ls -lahG'
 # Windows-isms
