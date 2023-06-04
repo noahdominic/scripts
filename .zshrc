@@ -26,7 +26,7 @@ setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
 # Path env var
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/scripts:$HOME/bin:$PATH
 
 # Functions for general convenience
 # Make a new dir $name and cd into $name
