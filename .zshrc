@@ -1,8 +1,5 @@
 # Created by Noah Dominic <github.com/noahdominic>
 
-# Note: This version was created for a workstation running on Fedora 36. 
-#       Things may need to be modified to fit your system.
-
 # Enable colourised output for CLI
 export CLICOLOR=1
 
