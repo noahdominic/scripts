@@ -47,7 +47,11 @@ switch ()
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
-alias ls='ls -G'
+if ls --color >/dev/null 2>&1; then
+  alias ls='ls --color=auto'
+else
+  alias ls='ls -G'
+fi
 alias ll='ls -lGh'
 alias la='ls -lahG'
 # Windows-isms
