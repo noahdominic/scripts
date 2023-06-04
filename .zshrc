@@ -32,8 +32,16 @@ export PATH=$HOME/scripts:$HOME/bin:$PATH
 # Make a new dir $name and cd into $name
 mkcd ()
 {
-    mkdir -p -- "$1" &&
-       cd -- "$1"
+        if [ $# -eq 0 ]; then
+                echo "Error: No directory name provided."
+                return 1
+        elif [ $# -gt 1 ]; then
+                echo "Error: Only one directory name can be provided."
+                return 1
+        fi
+
+        mkdir -p -- "$1" &&
+        cd -- "$1"
 }
 # Switch file names, so A.ext becomes B.ext and B.ext becomes A.ext
 switch ()
