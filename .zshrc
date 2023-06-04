@@ -106,9 +106,3 @@ bindkey "^[[F"    end-of-line
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-backup() {
-    original_path="$1"
-    archive_path="$2"
-
-    tar --sort='name' -cvf - "$original_path" | xz -9zve -T0 > "$archive_path"
-}
