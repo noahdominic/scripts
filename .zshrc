@@ -61,7 +61,6 @@ alias 'cd..'='cd ..'
 # Aliases for journaling
 alias journal='cd ~/journal/'
 alias today="echo $(date +'%Y/%m/%d')"
-alias inittoday=~/journal/inittoday
 alias nanotoday="nano ~/journal/$(today)"
 alias gedittoday="gnome-text-editor ~/journal/$(today)"
 alias vimtoday="vim ~/journal/$(today)"
