@@ -82,21 +82,6 @@ alias gco='git checkout'
 alias gcheckout='git checkout'
 alias grebase='git rebase'
 alias gmerge='git merge'
-gitRebaseAll() {
-  if [[ $# -eq 0 ]]; then
-    echo "gitRebaseAll - Rebase multiple branches into the current branch"
-    echo "Usage: gitRebaseAll branch1 [branch2 ...]"
-    return 0
-  fi
-
-  current_branch=$(git rev-parse --abbrev-ref HEAD)
-  for branch in "$@"; do
-    echo "Rebasing branch '$branch' into '$current_branch'"
-    git checkout "$branch" && git rebase "$current_branch"
-  done
-
-  git checkout "$current_branch"
-}
 
 # Aliases for cargo
 type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
