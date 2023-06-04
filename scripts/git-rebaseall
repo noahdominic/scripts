@@ -1,6 +1,6 @@
 #!/bin/sh
  
-if [[ $# -eq 0 ]]; then
+if [ $# -eq 0 ]; then
         echo "git rebaseall - Rebase multiple branches into the current branch"
         echo "Usage: git rebaseall branch 1 [branch2 ...]"
         exit 1
