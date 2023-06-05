@@ -2,7 +2,7 @@
 
 # Check if the required number of arguments is provided
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-  echo "Usage: $0 directory_path [archive_path]"
+  echo "Usage: backup  directory_path [archive_path]"
   exit 1
 fi
 
