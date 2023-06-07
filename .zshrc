@@ -57,8 +57,16 @@ alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
 alias ll='ls -lGh'
 alias la='ls -lahG'
+# macOS-isms
+if command -v xdg-open >/dev/null 2>&1; then
+    alias open='xdg-open'
+fi
 # Windows-isms
 alias cls='clear'
+# Aliases for Linux/GNOME
+if command -v gnome-text-editor >/dev/null 2>&1; then
+    alias gte='gnome-text-editor'
+fi
 # Fix for common typos
 alias 'cd..'='cd ..'
 # Aliases for journaling
