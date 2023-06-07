@@ -1,0 +1,63 @@
+#!/bin/sh
+
+extract_archive() {
+  file_path="$1"
+  base_name=$(basename "$file_path")
+  dir_name="${base_name%.*}"
+  count=0
+
+  while [ -d "$dir_name" ]; do
+    count=$((count + 1))
+    dir_name="${base_name%.*} (${count})"
+  done
+
+  mkdir "$dir_name"
+
+  case "$file_path" in
+    *.zip)
+      unzip "$file_path" -d "$dir_name"
+      ;;
+    *.rar)
+      unrar x "$file_path" "$dir_name"
+      ;;
+    *.7z)
+      7z x "$file_path" -o"$dir_name"
+      ;;
+    *)
+      echo "Unsupported file format. Please provide a .zip, .rar, or .7z file."
+      exit 1
+      ;;
+  esac
+
+  echo "Extraction completed. Files extracted to $dir_name."
+}
+
+# Check if the required command is available
+check_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "Error: $1 command not found."
+    exit 1
+  fi
+}
+
+# Check if the number of arguments is correct
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <compressed_file_path>"
+  exit 1
+fi
+
+# Check for the required commands
+check_command "unzip"
+check_command "unrar"
+check_command "7z"
+
+# Check if the file exists
+file_path="$1"
+if [ ! -f "$file_path" ]; then
+  echo "Error: File not found."
+  exit 1
+fi
+
+# Extract the archive
+extract_archive "$file_path"
+
