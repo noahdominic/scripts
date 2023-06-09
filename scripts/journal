@@ -1,0 +1,134 @@
+#!/bin/bash
+
+print_manual() {
+    echo "JOURNAL(1)                    User Commands                   JOURNAL(1)"
+    echo
+    echo "NAME"
+    echo "       journal - script for managing a journal using Git version control"
+    echo
+    echo "SYNOPSIS"
+    echo "       journal <command>"
+    echo
+    echo "DESCRIPTION"
+    echo "       The journal script is a bash script for managing a journal using Git"
+    echo "       version control. It provides various commands for different journal"
+    echo "       operations. The script assumes the existence of a directory named"
+    echo "       'journal' in the user's home directory where the journal entries are"
+    echo "       stored."
+    echo
+    echo "COMMANDS"
+    echo "       The following commands are supported by the journal script:"
+    echo
+    echo "       update"
+    echo "              Fetches the latest changes from the remote repository and shows"
+    echo "              the status of the local repository."
+    echo
+    echo "       status"
+    echo "              Shows the status of the local repository."
+    echo
+    echo "       push   Pushes the local changes to the remote repository."
+    echo
+    echo "       add <files>"
+    echo "              Adds the specified files to the local repository for tracking."
+    echo
+    echo "       commit <options>"
+    echo "              Commits the changes in the local repository with the provided"
+    echo "              options."
+    echo
+    echo "       reset  Resets the local repository to the last commit."
+    echo
+    echo "       new    Initializes a new journal entry for the current day and opens it"
+    echo "              in the default editor (Vim)."
+    echo
+    echo "       show   Displays the contents of the current day's journal entry using"
+    echo "              the 'less' pager."
+    echo
+    echo "       write  Opens the current day's journal entry in the default editor"
+    echo "              (Vim) for writing or editing."
+    echo
+    echo "       vim    Opens the current day's journal entry in Vim for writing or"
+    echo "              editing."
+    echo
+    echo "       nano   Opens the current day's journal entry in the Nano editor for"
+    echo "              writing or editing."
+    echo
+    echo "       *      If an unrecognized command is provided, the script will display"
+    echo "              a default message."
+    echo
+    echo "EXAMPLES"
+    echo "       To update the journal repository, run:"
+    echo
+    echo "              \$ journal update"
+    echo
+    echo "       To add a file to the journal repository, run:"
+    echo
+    echo "              \$ journal add <filename>"
+    echo
+    echo "SEE ALSO"
+    echo "       git(1), vim(1), nano(1), less(1)"
+    echo
+    echo "AUTHOR"
+    echo "       Written by [Your Name]"
+    echo
+    echo "COPYRIGHT"
+    echo "       This is free software; see the source for copying conditions. There is"
+    echo "       NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR"
+    echo "       PURPOSE."
+    echo
+    echo "BUGS"
+    echo "       Please report any bugs or issues to [Your Email]."
+}
+
+JOURNAL_PATH="$HOME/journal"
+TODAY=$(date +'%Y/%m/%d')
+TODAYS_ENTRY="$JOURNAL_PATH/$TODAY"
+
+write() {
+    vim + "$TODAYS_ENTRY"
+}
+
+# Main command dispatcher
+case "$1" in
+    update)
+        cd "$JOURNAL_PATH" && git fetch -v && git status
+        ;;
+    status)
+        cd "$JOURNAL_PATH" && git status
+        ;;
+    push)
+        cd "$JOURNAL_PATH" && git push
+        ;;
+    add)
+        shift # Remove the first argument ("add") from the argument list
+        cd "$JOURNAL_PATH" && git add "$@"
+        ;;
+    commit)
+        shift
+        cd "$JOURNAL_PATH" && git commit "$@"
+        ;;
+    reset)
+        cd "$JOURNAL_PATH" && git reset
+        ;;
+    new)
+        inittoday
+        write
+        ;;
+    show)
+        less "$TODAYS_ENTRY"
+        ;;
+    write)
+        write
+        ;;
+    vim)
+        write
+        ;;
+    nano)
+        nano "$TODAYS_ENTRY"
+        ;;
+    -h) 
+        print_manual | less
+        ;;
+    *)
+        echo "usage: journal command"
+        ;;
+esac
