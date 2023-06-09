@@ -70,12 +70,7 @@ fi
 # Fix for common typos
 alias 'cd..'='cd ..'
 # Aliases for journaling
-alias journal='cd ~/journal/'
-alias today="echo $(date +'%Y/%m/%d')"
-alias nanotoday="nano ~/journal/$(today)"
-alias gedittoday="gnome-text-editor ~/journal/$(today)"
-alias vimtoday="vim ~/journal/$(today)"
-alias showtoday="cat ~/journal/$(today)"
+
 # Aliases for Jekyll [JEKYLL REQUIRED]
 type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
 # Aliases for make & CMake [MAKE & CMAKE REQUIRED]
