@@ -95,12 +95,19 @@ case "$1" in
     status)
         cd "$JOURNAL_PATH" && git status
         ;;
+    pull)
+        cd "$JOURNAL_PATH" && git pull
+        ;;
     push)
         cd "$JOURNAL_PATH" && git push
         ;;
     add)
         shift # Remove the first argument ("add") from the argument list
         cd "$JOURNAL_PATH" && git add "$@"
+        ;;
+    gcam)
+        shift # Remove the first argument ("add") from the argument list
+        cd "$JOURNAL_PATH" && git add . && git commit -m "$@"
         ;;
     commit)
         shift
