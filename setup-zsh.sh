@@ -85,18 +85,17 @@ download_zsh_extensions(){
 
     total=${#extensions[@]}
 
-    for ((i = 0; i < total; i++)); do
-        url="${extensions[i]}"
+    for url in "${extensions[@]}"; do
         extension=$(basename "$url" ".git")
         
         echo ""
-        echo "Downloading extensions>>> [$((i + 1))/$total] Downloading $extension..."
+        echo "Downloading extensions>>> Downloading $extension..."
 
-        if [ ! -f "$extension_dir/$extension/$extension.zsh" ]; then
+        if [ ! -d "$extension_dir/$extension" ]; then
             git clone "$url"
-            echo "Downloading extensions>>> [$((i + 1))/$total] Downloaded!"
+            echo "Downloading extensions>>> Downloaded!"
         else
-            echo "Downloading extensions>>> [$((i + 1))/$total] $extension already installed."
+            echo "Downloading extensions>>> $extension already installed."
         fi
     done
 }
