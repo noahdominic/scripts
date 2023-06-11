@@ -1,8 +1,5 @@
 # Created by Noah Dominic <github.com/noahdominic>
 
-# Enable colourised output for CLI
-export CLICOLOR=1
-
 # ZSH plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -55,6 +52,7 @@ switch ()
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
+alias ls='ls -p --color=auto'
 alias ll='ls -lh'
 alias la='ls -lah'
 # macOS-isms
