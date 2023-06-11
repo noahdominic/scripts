@@ -115,7 +115,8 @@ symlink_zshrc() {
         echo "Symlinking configs>>> 1. Overwrite the existing '.zshrc' file"
         echo "Symlinking configs>>> 2. Rename the existing '.zshrc' file to '.zshrc_previous'"
         echo "Symlinking configs>>> 3. Cancel the symlinking"
-        read -p "Enter the option number: " choice
+        printf "Enter the option number: "
+        read -r choice
 
         case $choice in
             1)
