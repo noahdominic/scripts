@@ -50,7 +50,7 @@ install_zsh(){
             ;;
         FreeBSD*)
             echo "Installing zsh>>> Detected FreeBSD. Installing ZSH..."
-            sudo install -y zsh
+            sudo pkg install -y zsh
             return
             ;;
         OpenBSD*)
