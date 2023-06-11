@@ -87,7 +87,7 @@ download_zsh_extensions(){
 
     for url in "${extensions[@]}"; do
         extension=$(basename "$url" ".git")
-        
+
         echo ""
         echo "Downloading extensions>>> Downloading $extension..."
 
