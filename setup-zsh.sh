@@ -98,7 +98,7 @@ download_zsh_extensions(){
 }
 
 symlink_zshrc() {
-    BASEDIR=$(dirname "$0")
+    BASEDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
     echo ""
     echo ""
