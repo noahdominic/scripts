@@ -74,18 +74,15 @@ download_zsh_extensions(){
     echo ""
     echo ""
     echo "Downloading extensions>>> Now downloading extensions..."
-    extensions=(
-        "https://github.com/zsh-users/zsh-autosuggestions.git"
-        "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    )
 
     extension_dir="$HOME/.zsh"
     mkdir -p "$extension_dir"
     cd "$extension_dir" || exit
 
-    total=${#extensions[@]}
+    set -- "https://github.com/zsh-users/zsh-autosuggestions.git" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    total=2
 
-    for url in "${extensions[@]}"; do
+    for url in "$@"; do
         extension=$(basename "$url" ".git")
 
         echo ""
