@@ -66,33 +66,6 @@ install_zsh(){
 }
 
 download_zsh_extensions(){
-    # if ! command -v git >/dev/null 2>&1; then
-    #     echo "You don't seem to have \`git\`. Please install it, as it is required for downloading extensions."
-    #     exit 1
-    # fi
-
-    # echo "Now downloading extensions..."
-    # TOTAL=2
-
-    # mkdir -p "$HOME/.zsh"
-    # cd "$HOME/.zsh" || exit
-
-    # echo "[1/$TOTAL] Downloading zsh-autosuggestions..."
-    # if [ ! -f "$(pwd)/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    #     git clone https://github.com/zsh-users/zsh-autosuggestions.git
-    #     echo "[1/$TOTAL] Downloaded!"
-    # else
-    #     echo "[1/$TOTAL] zsh-autosuggestions already installed."
-    # fi
-
-    # echo "[2/$TOTAL] Downloading zsh-syntax-highlighting..."
-    # if [ ! -f "$(pwd)/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    #     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-    #     echo "[2/$TOTAL] Downloaded!"
-    # else
-    #     echo "[2/$TOTAL] zsh-syntax-highlighting already installed."
-    # fi
-
     if ! command -v git >/dev/null 2>&1; then
         echo "You don't seem to have 'git' installed. Please install it as it is required for downloading extensions."
         exit 1
