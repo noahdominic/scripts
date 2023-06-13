@@ -65,6 +65,8 @@ alias cls='clear'
 if command -v gnome-text-editor >/dev/null 2>&1; then
     alias gte='gnome-text-editor'
 fi
+# Aliases for home directory
+alias dev='cd ~/Developer'
 # Fix for common typos
 alias 'cd..'='cd ..'
 # Aliases for Jekyll [JEKYLL REQUIRED]
