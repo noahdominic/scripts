@@ -20,7 +20,7 @@ setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
 # Path env var
-export PATH=$HOME/scripts:$HOME/bin:$PATH
+export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:$PATH
 
 # Functions for general convenience
 # Make a new dir $name and cd into $name
@@ -67,8 +67,6 @@ if command -v gnome-text-editor >/dev/null 2>&1; then
 fi
 # Fix for common typos
 alias 'cd..'='cd ..'
-# Aliases for journaling
-
 # Aliases for Jekyll [JEKYLL REQUIRED]
 type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
 # Aliases for make & CMake [MAKE & CMAKE REQUIRED]
