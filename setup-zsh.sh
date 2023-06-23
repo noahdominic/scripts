@@ -95,6 +95,7 @@ download_zsh_extensions(){
             echo "Downloading extensions>>> $extension already installed."
         fi
     done
+    cd -
 }
 
 symlink_zshrc() {
