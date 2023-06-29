@@ -25,11 +25,6 @@ extract_tar_xz() {
     tar -xJf "$1" -C "${1%.tar.xz}"
 }
 
-# Function to extract zstd files
-extract_zstd() {
-    tar --use-compress-program=zstd -xvf "$1" -C "${1%.zst}"
-}
-
 # Get the file extension
 extension="${1##*.}"
 
@@ -44,9 +39,8 @@ case "$extension" in
     7z) extract_7z "$1" ;;
     rar) extract_rar "$1" ;;
     zip) extract_zip "$1" ;;
-    tar.gz) extract_tar_gz "$1" ;;
-    tar.xz) extract_tar_xz "$1" ;;
-    zst) extract_zstd "$1" ;;
+    gz) extract_tar_gz "$1" ;;  # This assumes that gz files are tarred
+    xz) extract_tar_xz "$1" ;;  # This assumes that xz files are tarred
     *) echo "Unsupported file format: $extension"
        exit 1 ;;
 esac
