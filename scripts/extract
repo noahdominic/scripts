@@ -1,63 +1,55 @@
-#!/bin/sh
+#!/bin/bash
 
-extract_archive() {
-  file_path="$1"
-  base_name=$(basename "$file_path")
-  dir_name="${base_name%.*}"
-  count=0
-
-  while [ -d "$dir_name" ]; do
-    count=$((count + 1))
-    dir_name="${base_name%.*} (${count})"
-  done
-
-  mkdir "$dir_name"
-
-  case "$file_path" in
-    *.zip)
-      unzip "$file_path" -d "$dir_name"
-      ;;
-    *.rar)
-      unrar x "$file_path" "$dir_name"
-      ;;
-    *.7z)
-      7z x "$file_path" -o"$dir_name"
-      ;;
-    *)
-      echo "Unsupported file format. Please provide a .zip, .rar, or .7z file."
-      exit 1
-      ;;
-  esac
-
-  echo "Extraction completed. Files extracted to $dir_name."
+# Function to extract 7z files
+extract_7z() {
+    7z x "$1" -o"${1%.7z}"
 }
 
-# Check if the required command is available
-check_command() {
-  if ! command -v "$1" >/dev/null 2>&1; then
-    echo "Error: $1 command not found."
-    exit 1
-  fi
+# Function to extract rar files
+extract_rar() {
+    unrar x "$1" "${1%.rar}"
 }
 
-# Check if the number of arguments is correct
-if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 <compressed_file_path>"
-  exit 1
-fi
+# Function to extract zip files
+extract_zip() {
+    unzip "$1" -d "${1%.zip}"
+}
 
-# Check for the required commands
-check_command "unzip"
-check_command "unrar"
-check_command "7z"
+# Function to extract tar.gz files
+extract_tar_gz() {
+    tar -xzf "$1" -C "${1%.tar.gz}"
+}
+
+# Function to extract tar.xz files
+extract_tar_xz() {
+    tar -xJf "$1" -C "${1%.tar.xz}"
+}
+
+# Function to extract zstd files
+extract_zstd() {
+    tar --use-compress-program=zstd -xvf "$1" -C "${1%.zst}"
+}
+
+# Get the file extension
+extension="${1##*.}"
 
 # Check if the file exists
-file_path="$1"
-if [ ! -f "$file_path" ]; then
-  echo "Error: File not found."
-  exit 1
+if [ ! -f "$1" ]; then
+    echo "File not found: $1"
+    exit 1
 fi
 
-# Extract the archive
-extract_archive "$file_path"
+# Check the file extension and extract accordingly
+case "$extension" in
+    7z) extract_7z "$1" ;;
+    rar) extract_rar "$1" ;;
+    zip) extract_zip "$1" ;;
+    tar.gz) extract_tar_gz "$1" ;;
+    tar.xz) extract_tar_xz "$1" ;;
+    zst) extract_zstd "$1" ;;
+    *) echo "Unsupported file format: $extension"
+       exit 1 ;;
+esac
+
+exit 0
 
