@@ -50,6 +50,8 @@ switch ()
 }
 
 # Aliases for general convenience
+# NVIDIA aliases
+alias nvidia-smi='watch --interval 0.6 nvidia-smi'
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
