@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Check if the required number of arguments is provided
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
@@ -36,34 +36,3 @@ if [ $? -eq 0 ]; then
 else
   echo "Archive creation failed!"
 fi
-
-# 
-# # Get the absolute path of the source directory
-# source_path=$(cd "$1" && pwd)
-# 
-# # Determine the destination path
-# if [ $# -eq 2 ]; then
-#   # Use the provided archive_path if available
-#   dest_path=$(cd "$2" && pwd)
-# else
-#   # Use the same directory as the source for the archive
-#   dest_path=$(dirname "$source_path")
-# fi
-# 
-# # Create the archive file name with the current timestamp
-# file_name=$(basename "$source_path")
-# timestamp=$(date +'%Y-%m-%d-%H-%M')
-# archive_name="${file_name}_${timestamp}.tar.xz"
-# 
-# # Combine the destination path and archive name
-# dest_path_archive="${dest_path}/${archive_name}"
-# 
-# # Execute the tar and xz commands to create the archive
-# tar -vv -cf - "$source_path" | xz -9zve -T0 > "$dest_path_archive"
-# 
-# # Check if the command executed successfully
-# if [ $? -eq 0 ]; then
-#   echo "Archive created successfully: $dest_path_archive"
-# else
-#   echo "Archive creation failed!"
-# fi
