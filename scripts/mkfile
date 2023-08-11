@@ -1,0 +1,12 @@
+#!/bin/sh
+
+mkfile() {
+	mkdir -p "$(dirname "$1")" && touch "$1"
+}
+
+if [ $# -ne 1 ]; then
+	echo "Usage: mkfile <path/to/file.txt>"
+	exit 1
+fi
+
+mkfile "$1"
