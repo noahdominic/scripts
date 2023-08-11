@@ -20,7 +20,7 @@ setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
 # Path env var
-export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:$HOME/Applications:$PATH
 
 # Functions for general convenience
 # Make a new dir $name and cd into $name
@@ -94,7 +94,7 @@ type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
 # Prerequisite configs for Jekyll
-export GEM_HOME='~/gems'
+export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:/home/noahdominic/.cargo/bin:$PATH
 
 # Keybindings
@@ -107,16 +107,24 @@ bindkey "^[[1;5D" backward-word
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/noahdominic/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
-        . "/usr/etc/profile.d/conda.sh"
+    if [ -f "/home/noahdominic/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/noahdominic/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/usr/bin:$PATH"
+        export PATH="/home/noahdominic/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# pnpm
+export PNPM_HOME="/home/noahdominic/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
