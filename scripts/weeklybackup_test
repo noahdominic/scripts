@@ -1,0 +1,52 @@
+#!/bin/sh
+
+FROM_ROOT_PATH=/run/media/noahdominic/Leviathan
+TO_ROOT_PATH=/run/media/noahdominic/Mnemosyne
+PHOTOS_PATH=Photos
+PACKS_PATH=Packs
+INSTALLERS_PATH=Installers
+STUDIO_ONE_PATH="Studio One"
+
+printf "Do you want to back up Studio One (y/N): "
+read response_studio_one
+printf "Do you want to back up Packs? (y/N): "
+read response_packs
+printf "Do you want to back up Photos? (y/N): "
+read response_photos
+printf "Do you want to back up Installers? (y/N): "
+read response_installers
+
+# Check if Studion One backup is requested
+if [ "$response_studio_one" = "y" ] || [ "$response_studio_one" = "Y" ]; then
+  printf "Backing up Studio One...\n"
+  screen -dmS backup_studio_one_configs tar -cJf "$TO_ROOT_PATH/$STUDIO_ONE_PATH/Other files.tar.xz" "$FROM_ROOT_PATH/$STUDIO_ONE_PATH/Macros" "$FROM_ROOT_PATH/$STUDIO_ONE_PATH/Presets" "$FROM_ROOT_PATH/$STUDIO_ONE_PATH/Projects" "$FROM_ROOT_PATH/$STUDIO_ONE_PATH/Shows" "$FROM_ROOT_PATH/$STUDIO_ONE_PATH/Snapshots"
+  screen -dmS backup_studio_one_songs backup-songs 
+else
+  printf "Skipping Studio One.\n"
+fi
+
+# Check if Packs backup is requested
+if [ "$response_packs" = "y" ] || [ "$response_packs" = "Y" ]; then
+  printf "Backing up Packs...\n"
+  echo screen -dmS backup_packs  backup "$FROM_ROOT_PATH/$PACKS_PATH" "$TO_ROOT_PATH"
+else
+  printf "Skipping Packs.\n"
+fi
+
+# Check if Photos backup is requested
+if [ "$response_photos" = "y" ] || [ "$response_photos" = "Y" ]; then
+  printf "Backing up Photos...\n"
+  echo screen -dmS backup_photos backup "$FROM_ROOT_PATH/$PHOTOS_PATH" "$TO_ROOT_PATH"
+else
+  printf "Skipping Photos.\n"
+fi
+
+# Check if Installers backup is requested
+if [ "$response_installers" = "y" ] || [ "$response_installers" = "Y" ]; then
+  printf "Backing up Installers...\n"
+  screen -dmS backup_installers backup "$FROM_ROOT_PATH/$INSTALLERS_PATH" "$TO_ROOT_PATH"
+else
+  printf "Skipping Installers.\n"
+fi
+
+echo "Backup processes called."

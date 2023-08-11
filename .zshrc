@@ -1,3 +1,4 @@
+
 # Created by Noah Dominic <github.com/noahdominic>
 
 # ZSH plugins
@@ -20,7 +21,7 @@ setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
 # Path env var
-export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:$HOME/Applications:$PATH
+export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/.deno/bin:$PATH
 
 # Functions for general convenience
 # Make a new dir $name and cd into $name
@@ -49,6 +50,8 @@ switch ()
 }
 
 # Aliases for general convenience
+# NVIDIA aliases
+alias nvidia-smi='watch --interval 0.6 nvidia-smi'
 # Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
 # Shortcut aliases for LIST
@@ -119,7 +122,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # pnpm
 export PNPM_HOME="/home/noahdominic/.local/share/pnpm"
