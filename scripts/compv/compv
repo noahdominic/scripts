@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# compv
+#
+# Compresses the video files (m4v, mp4, avi, mkv, flv, mov) in 
+# the current directory through one of these possible compression methods:
+# 1.  If the video file has a pixel count (length * width) greater than 921600,
+#     i.e. the pixel count of a 1280x720 video, the video is downscaled 
+#     such that its new pixel count is about 921600;
+# 2.  If the video file has a bit rate of above 1000kbps (or the lower end
+#     of the commonly recommended bit rate for 720p video), it re-transcodes
+#     the file into about 1000kbps.
+# 3.  If a video file has a pixel count greater than 921600 and a bit rate 
+#     above 1000kbps, it downscales the video and retranscodes it.
+# The original 
+#
+# Requirements:   This script relies on ffmpeg. Ensure ffmpeg is installed 
+#     and accessible in your system PATH.
+#
+# Disclaimer:   This script has only been tested in RHEL- and 
+#     Debian-based Linux operating systems.
+#
+#
+# Written by Noah Dominic Miranda Silvio
+# Copyright (c) 2023 Noah Dominic Miranda Silvio.
+# All rights reserved.
+#
+# This software is licensed under the EU Public Licence v. 1.2. 
+
+# Create 'compv_original' and 'compv_processed' directories
+mkdir -p compv_original compv_processed 
+
+# Set max_pixel_count
+MAX_PIXEL_COUNT=921600
+
+# Initialize count and array
+count=0
+to_be_processed_files=()
+
+# Loop through video files in the current directory
+for file in *.{m4v,mp4,avi,mkv,flv,mov}; do
+    to_compress=false
+    to_downscale=false
+
+    if [ -f "$file" ]; then
+        bit_rate=$(ffprobe -v error -show_entries format=bit_rate -of default=noprint_wrappers=1:nokey=1 "$file")
+
+        size=$(du -h "$file" | awk '{print $1}')
+
+        resolution=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$file")
+        width=$(echo "$resolution" | awk -F'x' '{print $1}')
+        height=$(echo "$resolution" | awk -F'x' '{print $2}')
+
+        # Check which conditions the video fits in
+        
+        if [ "$bit_rate" -gt 1000000 ]; then
+            to_compress=true
+        fi
+
+        if [ "$((height * width))" -gt "$MAX_PIXEL_COUNT" ]; then
+            to_downscale=true
+            new_height=$(echo "scale=0; sqrt(($height * $MAX_PIXEL_COUNT) / $width)" | bc)
+            new_width=$(echo "scale=0; sqrt(($width * $MAX_PIXEL_COUNT) / $height)" | bc)
+            if [ "$((new_height % 2))" -ne 0 ]; then
+            new_height=$((new_height + 1))
+            fi
+        fi
+
+        # Print out process to be down depending on the conditions
+
+        if $to_compress && $to_downscale; then
+            count=$((count + 1))
+            printf "%s.\t [%s, %sx%s @ %s]\t %s\t -- To be compressed to 1000kbps and downscaled to %sx%s\n" "$count" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
+            to_be_processed_files+=("$file")
+        elif $to_compress; then
+            count=$((count + 1))
+            printf "%s.\t [%s, %sx%s @ %s]\t %s\t -- To be compressed to 1000kbps\n" "$count" "$bit_rate" "$width" "$height" "$size" "$file"
+            to_be_processed_files+=("$file")
+        elif $to_downscale; then
+            count=$((count + 1))
+            printf "%s.\t [%s, %sx%s @ %s]\t %s\t -- To be downscaled to %sx%s\n" "$count" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
+            to_be_processed_files+=("$file")
+        else
+            printf "  .\t [%s, %sx%s @ %s]\t %s\t -- SKIPPED\n" "$bit_rate" "$width" "$height" "$size" "$file"
+        fi
+    fi
+done
+
+# Process files in to_be_processed_files array
+total_number=${#to_be_processed_files[@]}
+for ((i=0; i<total_number; i++)); do
+    file="${to_be_processed_files[i]}"
+
+    bit_rate=$(ffprobe -v error -show_entries format=bit_rate -of default=noprint_wrappers=1:nokey=1 "$file")
+
+    resolution=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$file")
+    width=$(echo "$resolution" | awk -F'x' '{print $1}')
+    height=$(echo "$resolution" | awk -F'x' '{print $2}')
+    pixel_count=$((height * width))
+
+    to_compress=false
+    to_downscale=false
+
+    # Check conditions for compression and downscaling
+    if [ "$bit_rate" -gt 1000000 ]; then
+        to_compress=true
+    fi
+
+    if [ "$pixel_count" -gt "$MAX_PIXEL_COUNT" ]; then
+        to_downscale=true
+        new_height=$(echo "scale=0; sqrt(($height * $MAX_PIXEL_COUNT) / $width)" | bc)
+        new_width=$(echo "scale=0; sqrt(($width * $MAX_PIXEL_COUNT) / $height)" | bc)
+        if [ "$((new_height % 2))" -ne 0 ]; then
+        new_height=$((new_height + 1))
+        fi
+    fi
+
+    printf "\n"
+
+    # Process based on conditions
+    if $to_compress && $to_downscale; then
+        printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be compressed to 1000kbps and downscaled to %sx%s\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
+
+        ffmpeg -i "$file" -b:v 1000k -vf "scale=${new_width}:${new_height}" "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+
+    elif $to_compress; then
+        printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be compressed to 1000kbps\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file"
+
+        ffmpeg -i "$file" -b:v 1000k "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+
+    elif $to_downscale; then
+        printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be downscaled to %sx%s\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
+
+        ffmpeg -i "$file" -vf "scale=${new_width}:${new_height}" "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+
+    fi
+done
+
+printf "Processing %s complete" "$(pwd)\n"
