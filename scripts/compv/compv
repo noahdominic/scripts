@@ -121,17 +121,17 @@ for ((i=0; i<total_number; i++)); do
     if $to_compress && $to_downscale; then
         printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be compressed to 1000kbps and downscaled to %sx%s\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
 
-        ffmpeg -i "$file" -b:v 1000k -vf "scale=${new_width}:${new_height}" "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+        ffmpeg -i "$file" -b:v 1000k -vf "scale=${new_width}:${new_height}" "compv_processed/${file%.*}.${file##*.}" && mv "$file" "compv_original"
 
     elif $to_compress; then
         printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be compressed to 1000kbps\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file"
 
-        ffmpeg -i "$file" -b:v 1000k "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+        ffmpeg -i "$file" -b:v 1000k "compv_processed/${file%.*}.${file##*.}" && mv "$file" "compv_original"
 
     elif $to_downscale; then
         printf "%d/%d.\t Processing [%s, %sx%s @ %s] %s -- To be downscaled to %sx%s\n" "$((i+1))" "$total_number" "$bit_rate" "$width" "$height" "$size" "$file" "$new_width" "$new_height"
 
-        ffmpeg -i "$file" -vf "scale=${new_width}:${new_height}" "compv_processed${file%.*}.${file##*.}" && mv "$file" "compv_original"
+        ffmpeg -i "$file" -vf "scale=${new_width}:${new_height}" "compv_processed/${file%.*}.${file##*.}" && mv "$file" "compv_original"
 
     fi
 done
