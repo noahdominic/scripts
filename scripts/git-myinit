@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+git init
+touch .gitignore 
+{
+    echo "# Default gitignore" 
+    echo ".idea/"
+    echo ".vscode/" 
+    echo ".DS_Store" 
+} >> .gitignore
+
