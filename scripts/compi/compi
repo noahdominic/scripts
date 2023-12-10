@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+
+"""
+compi 
+
+Written by Noah Dominic Miranda Silvio
+Copyright (c) 2022 Noah Dominic Miranda Silvio
+
+This script resizes and converts images into the WebP format, optimising them
+for the web.
+
+How to Use:
+1. Place the script in the directory containing your images or specify the image directory as a command-line argument.
+2. Execute the script by entering `python image_processor.py` in the terminal.
+
+The script performs the following:
+- Scans the specified directory for supported image files (.jpg, .jpeg, .png).
+- Generates different-sized versions of each image based on predefined settings.
+- Stores the resized images in respective folders with optimised quality settings.
+
+Customisation Options:
+- Modify the 'output_folders' dictionary to define desired sizes and quality settings.
+- Add or edit file extensions in 'file_extensions' to process different image formats.
+
+Important Notes:
+- Ensure Python is installed on your system.
+- Install the Pillow library using 'pip install pillow' for image processing.
+
+Your original images will remain unchanged as the script operates on copies.
+
+
+This software is licensed under the EU Public Licence v. 1.2.
+
+All rights reserved.
+"""
+
+import os
+from PIL import Image, ImageOps
+
+# Define the output folders and their corresponding width and quality settings
+output_folders = {
+    "24": {"width": 24, "quality": 10},
+    "300": {"width": 300, "quality": 75},
+    "512": {"width": 512, "quality": 75},
+    "1024": {"width": 1024, "quality": 85},
+    "2048": {"width": 2048, "quality": 85},
+    "max-res": {"width": None, "quality": 85}
+}
+
+# File extensions
+file_extensions = (".webp", ".jpg", ".jpeg", ".png")
+
+# Create output folders if they don't exist
+for folder_name in output_folders.keys():
+    os.makedirs(folder_name, exist_ok=True)
+
+# List all image files in the current directory
+image_files = [file for file in os.listdir() if file.lower().endswith(file_extensions)]
+
+for image_file in image_files:
+    img = Image.open(image_file)
+    img = ImageOps.exif_transpose(img)
+    original_width, original_height = img.size
+
+    for folder_name, settings in output_folders.items():
+        print(f"Processing {image_file} at width {settings['width'] if settings['width'] else 'max'}")
+        target_width = settings["width"]
+        quality = settings["quality"]
+
+        if target_width and original_width > target_width:
+            # Calculate new height while maintaining aspect ratio
+            target_height = int(original_height * (target_width / original_width))
+            img_resized = img.resize((target_width, target_height), Image.ANTIALIAS)
+        else:
+            img_resized = img
+            
+        # Change the file extension to '.webp'
+        output_filename = os.path.splitext(image_file)[0] + ".webp"
+        output_path = os.path.join(folder_name, output_filename)
+        img_resized.save(output_path, "WEBP", quality=quality)
+
+    img.close()
+
+print("Images have been processed and saved in respective folders.")
+
