@@ -1,35 +1,56 @@
 
 # Created by Noah Dominic <github.com/noahdominic>
 
-# ZSH plugins
+# ================= #
+# ZSH customisation #
+# ================= #
+
+## ZSH plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-setopt autocd
 
-# Lines forring zsh histories
+## ZSH histfiles
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory
 
-# PS1 for ZSH
+## ZSH prompt
 function parse_git_branch () {
-    # git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)\ /'
 }
 setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
-# PATH env var
+## ZSH keybindings
+bindkey "^[[3~"   delete-char
+bindkey "^[[H"    beginning-of-line
+bindkey "^[[F"    end-of-line
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+
+# ============================================================================
+# ENVIRONMENTAL VARIABLES 
+# ============================================================================
+
+## Path - mine
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/.deno/bin
 export PATH=$PATH:$HOME/Applications
 
-# Functions for general convenience
-# Make a new dir $name and cd into $name
+## Path - 3rd party
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/.deno/bin
+
+
+# ============================================================================
+# Functions 
+# ============================================================================
+
+## mkcd - Make a new dir $name and cd into $name
+##
 mkcd ()
 {
     if [ $# -eq 0 ]; then
@@ -43,7 +64,13 @@ mkcd ()
     mkdir -p -- "$1" &&
     cd -- "$1"
 }
-# Switch file names, so A.ext becomes B.ext and B.ext becomes A.ext
+
+## mkfile - touch but better
+##
+mkfile() { mkdir -p "$(dirname "$1")" && touch "$1"; }
+
+## switch - Switch file names, so A.ext becomes B.ext and B.ext becomes A.ext
+##
 switch ()
 {
     local file1="$1"
@@ -54,34 +81,49 @@ switch ()
     mv "$temp_file" "$file2"
 }
 
-# Aliases for general convenience
-# NVIDIA aliases
-alias nvidia-smi='watch --interval 0.6 nvidia-smi'
-# Open .zshrc on nano THEN automatically load it
-alias zshrc='nano ~/.zshrc && source ~/.zshrc'
-# Shortcut aliases for LIST
+# ============================================================================
+# Aliases - General
+# ============================================================================
+
+## Shortcut aliases for ls
 alias ls='ls -p --color=auto'
 alias ll='ls -lh'
 alias la='ls -lah'
-# macOS-isms
+
+## macOS-isms
 if command -v xdg-open >/dev/null 2>&1; then
     alias open='xdg-open'
 fi
-# Windows-isms
+
+## Windows-isms
 alias cls='clear'
-# Aliases for Linux/GNOME
+
+## Open .zshrc on nano THEN automatically load it
+alias zshrc='nano ~/.zshrc && source ~/.zshrc'
+
+## NVIDIA aliases
+alias nvidia-smi='watch --interval 0.6 nvidia-smi'
+
+## Program preferences 
+if command -v fastfetch >/dev/null 2>&1; then
+    alias neofetch='fastfetch'
+fi
 if command -v gnome-text-editor >/dev/null 2>&1; then
     alias gte='gnome-text-editor'
 fi
-# Aliases for home directory
-alias dev='cd ~/Developer'
-# Fix for common typos
+if command -v microsoft-edge >/dev/null 2>&1; then
+    alias microsoft-edge="microsoft-edge --enable-features=UseOzonePlatform --ozone-platform=wayland"
+fi
+
+## Fix for common typos
 alias 'cd..'='cd ..'
-# Aliases for Jekyll [JEKYLL REQUIRED]
-type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
-# Aliases for make & CMake [MAKE & CMAKE REQUIRED]
-alias cmake-build='cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug'
-# Aliases for git [GIT REQUIRED]
+
+
+# ============================================================================
+# Development - Proj Managemetn
+# ============================================================================
+
+## Git
 alias ga='git add'
 alias gadd='git add'
 alias gc='git commit'
@@ -92,30 +134,31 @@ alias gpush='git push'
 alias gstat='git status'
 alias ghash='git hash-object -w'
 alias gundo='git reset HEAD~'
+alias gb='git branch'
 alias gco='git checkout'
 alias gcheckout='git checkout'
 alias grebase='git rebase'
 alias gmerge='git merge'
 
-# Aliases for cargo
+
+# ============================================================================
+# Development - Software
+# ============================================================================
+
+## CMake
+alias cmake-build='cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug'
+
+## Rust/Cargo
 type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
-# Prerequisite configs for Jekyll
-export GEM_HOME=$HOME/gems
-export PATH=$HOME/gems/bin:/home/noahdominic/.cargo/bin:$PATH
+## Python: PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv virtualenv-init -)"
 
-# Keybindings
-bindkey "^[[3~"   delete-char
-bindkey "^[[H"    beginning-of-line
-bindkey "^[[F"    end-of-line
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/noahdominic/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+## Python: Conda
+__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -126,12 +169,28 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
 
-# pnpm
+## For GBA Dev
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=${DEVKITPRO}/devkitARM
+export DEVKITPPC=${DEVKITPRO}/devkitPPC
+export PATH=${DEVKITPRO}/tools/bin:$PATH
+alias vgam="visualboyadvance-m"
+
+
+# ============================================================================
+# Development - Web
+# ============================================================================
+
+## NPM/PNPM
 export PNPM_HOME="/home/noahdominic/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
+alias pnpx='pnpm dlx'
+
+## Jekyll
+type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
+export GEM_HOME='~/gems'
+export PATH=$PATH:$HOME/gems/bin:/home/noahdominic/.cargo/bin
