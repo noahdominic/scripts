@@ -20,8 +20,13 @@ function parse_git_branch () {
 setopt PROMPT_SUBST
 PROMPT='%F{green}%B%n@%m%b%f %~ %F{cyan}$(parse_git_branch)%f%# '
 
-# Path env var
-export PATH=$HOME/scripts:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/.deno/bin:$PATH
+# PATH env var
+export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/.deno/bin
+export PATH=$PATH:$HOME/Applications
 
 # Functions for general convenience
 # Make a new dir $name and cd into $name
