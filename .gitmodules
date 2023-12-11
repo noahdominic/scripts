@@ -1,0 +1,3 @@
+[submodule "scripts/journey"]
+	path = scripts/journey
+	url = git@github.com:noahdominic/journey.git
