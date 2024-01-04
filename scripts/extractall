@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Check if 7z is installed
+if ! command -v 7z &> /dev/null; then
+    echo "7z command not found.  Please install 7zip package for Linux from the official website (https://www.7-zip.org/download.html)."
+    exit 1
+fi
+
 extension="$1"
 
 if [ -z "$extension" ]; then
