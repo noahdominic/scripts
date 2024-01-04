@@ -97,6 +97,8 @@ fi
 
 ## Windows-isms
 alias cls='clear'
+alias dir='ls -lh'
+alias del='rm'
 
 ## Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
