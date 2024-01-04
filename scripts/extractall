@@ -1,0 +1,14 @@
+#!/bin/sh
+
+extension="$1"
+
+if [ -z "$extension" ]; then
+    echo "Usage: $0 <extension>"
+    exit 1
+fi
+
+for file in *."$extension"; do
+    foldername=$(basename -s ".$extension" "$file")
+    mkdir -p "$foldername" && 7z x "$file" -o"$foldername"
+done
+
