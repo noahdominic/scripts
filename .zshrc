@@ -153,9 +153,9 @@ type cargo >/dev/null 2>&1 && alias ccheck="cargo check"
 type cargo >/dev/null 2>&1 && alias crun="cargo run"
 
 ## Python: PyEnv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv >/dev/null 2>&1; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv virtualenv-init -)"
 fi
 
