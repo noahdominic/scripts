@@ -8,6 +8,7 @@
 ## ZSH plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+setopt autocd
 
 ## ZSH histfiles
 HISTFILE=~/.zsh_history
@@ -35,7 +36,8 @@ bindkey "^[[1;5D" backward-word
 # ============================================================================
 
 ## Path - mine
-export PATH=$PATH:$HOME/scripts
+export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" ) # Adds scripts/
+                                                                # and subdirs
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Applications
@@ -157,9 +159,7 @@ type cargo >/dev/null 2>&1 && alias crun="cargo run"
 ## Python: PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv virtualenv-init -)"
-fi
+eval "$(pyenv init -)"
 
 ## Python: Conda
 __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
