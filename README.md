@@ -51,10 +51,14 @@ git clone https://github.com/noahdominic/utils.git
 1. Run `setup-git.sh`. You may need to enable execution permissions with `chmod +x setup-git.sh`.
 1. Done.
 
-## Setting up zsh
+### Setting up zsh
 
 1. Run `setup-zsh.sh`. You may need to enable execution permissions with `chmod +x setup-zsh.sh`.
 1. Done.
+
+### Setting up scripts
+
+1. Add the location of your local machine's copy of this repo, `scripts/`, and all subdirectories to your `PATH`. If you use zsh, this setting is already in .zshrc .
 
 ## Contributing
 
