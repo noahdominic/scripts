@@ -18,14 +18,20 @@ and collected over the years.
 1. **compi**: Automatically compresses image into different levels. Featured in [Automated Image Compression for Web Development with Python](https://gist.github.com/noahdominic/3c4853bc5b41ff3389b12717caed7f0e).
 1. **compv**: Automatically compresses videos for low data transfers. See docs in file.
 1. **journey**: Submodule to [Journey](https://github.com/noahdominic/journey), a BASH-enabled journal/diary system.
-1. **erase-all-forge-keybindings.sh**: Deletes all the keybinding for the Forge extension on GNOME. This one is niche, imo.
-1. **extractall**: Extract all compressed packages into their own directories. I've only used this for extracting arrays of IMG files (this is how a lot of retro software is packaged) on Linux.
+1. **erase-all-forge-keybindings.sh**†: Deletes all the keybinding for the Forge extension on GNOME. This one is niche, imo.
+1. **extractall**†: Extract all compressed packages into their own directories. I've only used this for extracting arrays of IMG files (this is how a lot of retro software is packaged) on Linux.
 1. **git-myinit**: Typical `git init` but it autoadds an ignore file.
-1. **git-rebaseall**: Rebase multiple branches into the current branch.
+1. **git-rebaseall**‡: Rebase multiple branches into the current branch.
 1. **git-update**: Fetches and prints the status
 1. **json2csv**: Automatically converts JSONs to CSVs, if compatible. Really unstable.
 1. **mkfile**: `touch` with support for directories
 1. **ts2mp4**: Converts all TSs in the current directory and converts them to MP4.
+
+> Notes:
+>
+> † Are not tested well enough for my standards.
+>
+> ‡ Tested well enough but still may produce unexpected results due to the use of wildcards. (My regex skills suck).
 
 ## Installation & Usage
 
