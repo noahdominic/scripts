@@ -25,7 +25,6 @@ install_zsh(){
             # Check if the system is Fedora/RHEL/CentOS Stream/Rocky Linux/Alma Linux
             if command -v dnf >/dev/null 2>&1; then
                 echo "Installing zsh>>> Detected RPM-based system. Installing ZSH with DNF..."
-                sudo dnf update
                 sudo dnf install -y zsh
                 return
             fi
