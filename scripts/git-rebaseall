@@ -1,5 +1,11 @@
 #!/bin/sh
  
+# Check if git is installed
+if ! command -v git &> /dev/null; then
+    echo "git not found.  Please install git from your OS's repositories."
+    exit 1
+fi
+
 if [ $# -eq 0 ]; then
         echo "git rebaseall - Rebase multiple branches into the current branch"
         echo "Usage: git rebaseall branch 1 [branch2 ...]"
