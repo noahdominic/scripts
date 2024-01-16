@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Check if git is installed
+if ! command -v ffmpeg &> /dev/null; then
+  echo "ffmpeg not found.  Please install ffmpeg from your OS's repositories."
+  exit 1
+fi
+
 mkdir -p ts
 
 for file in *.ts
