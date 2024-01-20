@@ -159,7 +159,7 @@ type cargo >/dev/null 2>&1 && alias crun="cargo run"
 ## Python: PyEnv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+type pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 ## Python: Conda
 __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
