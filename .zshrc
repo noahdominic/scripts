@@ -36,8 +36,9 @@ bindkey "^[[1;5D" backward-word
 # ============================================================================
 
 ## Path - mine
-export PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" ) # Adds scripts/
-                                                                # and subdirs
+export PATH=$PATH$( 
+    find $HOME/scripts/ -type d -exec echo -n ":"{} \;) # Adds all the dirs in
+                                                        # `~/scripts`
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Applications
