@@ -131,11 +131,13 @@ alias 'cd..'='cd ..'
 ## Git
 alias ga='git add'
 alias gadd='git add'
+alias ga.='git add .'
 alias gc='git commit'
 alias gcommit='git commit'
-alias gcm='gc -m'
-alias gcam='gc -am'
+alias gcm='git commit -m'
+alias gcam='git commit -am'
 alias gpush='git push'
+alias gss='git status'
 alias gstat='git status'
 alias ghash='git hash-object -w'
 alias gundo='git reset HEAD~'
@@ -143,8 +145,10 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gcheckout='git checkout'
 alias grebase='git rebase'
+alias gr='git rebase'
 alias gmerge='git merge'
-
+alias gdf='git diff'
+alias gdiff='git diff'
 
 # ============================================================================
 # Development - Software
