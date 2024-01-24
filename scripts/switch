@@ -1,0 +1,15 @@
+#!/bin/sh
+
+## switch - Switch file names, so A.ext becomes B.ext and B.ext becomes A.ext
+
+if [ $# -ne 2 ]; then
+	echo "Usage: switch <file1> <file2>"
+	exit 1
+fi
+
+file1="$1"
+file2="$2"
+temp_file="temp_file_$RANDOM"
+mv "$file1" "$temp_file"
+mv "$file2" "$file1"
+mv "$temp_file" "$file2"
