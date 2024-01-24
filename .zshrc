@@ -36,8 +36,7 @@ bindkey "^[[1;5D" backward-word
 # ============================================================================
 
 ## Path - mine
-export PATH=$PATH$( 
-    find $HOME/scripts/ -type d -exec echo -n ":"{} \;) # Adds all the dirs in
+export PATH=$PATH$(find $HOME/scripts/ -type d -exec echo -n ":"{} \;) # Adds all the dirs in
                                                         # `~/scripts`
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
@@ -185,7 +184,16 @@ case ":$PATH:" in
 esac
 alias pnpx='pnpm dlx'
 
+## NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 ## Jekyll
 type jekyll >/dev/null 2>&1 && alias 'bejs'='bundle exec jekyll serve'
 export GEM_HOME='~/gems'
 export PATH=$PATH:$HOME/gems/bin:/home/noahdominic/.cargo/bin
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
