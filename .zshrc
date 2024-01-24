@@ -75,9 +75,9 @@ mkcd() {
 # ============================================================================
 
 ## Shortcut aliases for ls
-alias ls='ls -p --color=auto'
-alias ll='ls -lh'
-alias la='ls -lah'
+alias ls='ls -pG'
+alias ll='ls -lhG'
+alias la='ls -lahG'
 
 ## macOS-isms
 if command -v xdg-open >/dev/null 2>&1; then
