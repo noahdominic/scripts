@@ -52,36 +52,22 @@ export PATH=$PATH:$HOME/.deno/bin
 # Functions 
 # ============================================================================
 
-## mkcd - Make a new dir $name and cd into $name
-##
-mkcd ()
-{
+
+## mkcd - mkdir then cd
+
+mkcd() {
     if [ $# -eq 0 ]; then
         echo "Error: No directory name provided."
         return 1
-    elif [ $# -gt 1 ]; then
-        echo "Error: Only one directory name can be provided."
-        return 1
+    else
+        if [ $# -gt 1 ]; then
+            echo "Error: Only one directory name can be provided."
+            return 1
+        fi
     fi
 
     mkdir -p -- "$1" &&
     cd -- "$1"
-}
-
-## mkfile - touch but better
-##
-mkfile() { mkdir -p "$(dirname "$1")" && touch "$1"; }
-
-## switch - Switch file names, so A.ext becomes B.ext and B.ext becomes A.ext
-##
-switch ()
-{
-    local file1="$1"
-    local file2="$2"
-    local temp_file="temp_file_$RANDOM"
-    mv "$file1" "$temp_file"
-    mv "$file2" "$file1"
-    mv "$temp_file" "$file2"
 }
 
 # ============================================================================
