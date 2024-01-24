@@ -1,12 +1,15 @@
 #!/bin/sh
 
-mkfile() {
-	mkdir -p "$(dirname "$1")" && touch "$1"
-}
+# NOTE: macOS has their own `mkfile`.  Its API is different than this one.
+# This `mkfile` is more of an extended/limited version of `touch`
+# in the sense that it only make empty files, but it can also
+# accept pathed filenames.
 
-if [ $# -ne 1 ]; then
-	echo "Usage: mkfile <path/to/file.txt>"
+if [ $# -le 2 ]; then
+	echo "Usage: mkfile <path/to/file.extension>"
 	exit 1
 fi
 
-mkfile "$1"
+for file in "$@"; do
+	mkdir -p "$(dirname "$file")" && touch "$file"
+done
