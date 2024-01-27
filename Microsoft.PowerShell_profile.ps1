@@ -6,6 +6,37 @@
 
 Import-Module posh-git
 
+
+<#
+.SYNOPSIS
+   Checks if a specified PowerShell module exists.
+
+.DESCRIPTION
+   The Check-ModuleExists function checks if a specified PowerShell module exists on the system.  It returns a message indicating whether the module exists or not.
+
+.PARAMETER ModuleName
+   Specifies the name of the PowerShell module to check.
+
+.ALIASES
+   checkmod
+
+.NOTES
+   Copyright (c) 2024  Noah Dominic Miranda Silvio <github.com/noahdominic>
+#>
+function Check-ModuleExists {
+    param (
+        [string]$ModuleName
+    )
+
+    if (Get-Module -ListAvailable -Name $ModuleName) {
+        Write-Host "Module $ModuleName exists"
+    } else {
+        Write-Host "Module $ModuleName does not exist"
+    }
+}
+
+New-Alias -Name checkmod -Value Check-ModuleExists
+
 # ============================================================================
 # Functions
 # ============================================================================
