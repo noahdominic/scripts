@@ -81,6 +81,8 @@ function sudo {
 # ============================================================================
 
 ## Git
+### Git add
+New-Alias -Name g -Value git
 function ga {
     [CmdletBinding()]
     param (
@@ -99,11 +101,11 @@ function ga {
         git add $file
     }
 }
-New-Alias -Name gadd -Value ga
 function ga. {
     git add .
 }
-New-Alias -Name gcommit -Value 'git commit'
+New-Alias -Name gadd -Value ga
+### Git commit
 function gc-m {
     param([string]$message)
     & git commit -m $message
@@ -112,15 +114,28 @@ function gc-am {
     param([string]$message)
     & git commit -am $message
 }
-New-Alias -Name gpush -Value 'git push'
-New-Alias -Name gstat -Value 'git status'
-function ghash {
-    param([string]$object)
-    & git hash-object -w $object
+### Git status
+function gss {
+    git status
 }
-New-Alias -Name gundo -Value 'git reset HEAD~'
-New-Alias -Name gb -Value 'git branch'
-New-Alias -Name gco -Value 'git checkout'
-New-Alias -Name gcheckout -Value 'git checkout'
-New-Alias -Name grebase -Value 'git rebase'
-New-Alias -Name gmerge -Value 'git merge'
+New-Alias -Name gstat -Value gss
+### branching
+function gb {
+    param([string]$branch)
+    & git branch $branch
+}
+function gco {
+    param([string]$branch)
+    & git checkout $branch
+}
+function gr {
+    param([string]$branch)
+    & git rebase $branch
+}
+function gm {
+    param([string]$branch)
+    & git merge $branch
+}
+function gundo {
+    git reset HEAD~
+}
