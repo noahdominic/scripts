@@ -83,6 +83,9 @@ function sudo {
 ## Git
 New-Alias -Name ga -Value 'git add'
 New-Alias -Name gadd -Value 'git add'
+function ga. {
+    git add .
+}
 New-Alias -Name gcommit -Value 'git commit'
 function gcm {
     param([string]$message)
