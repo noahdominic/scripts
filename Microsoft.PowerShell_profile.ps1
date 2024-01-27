@@ -106,11 +106,12 @@ function ga. {
 }
 New-Alias -Name gadd -Value ga
 ### Git commit
-function gc-m {
+Remove-Alias -Name gcm -Force
+function gcm {
     param([string]$message)
     & git commit -m $message
 }
-function gc-am {
+function gcaam {
     param([string]$message)
     & git commit -am $message
 }
