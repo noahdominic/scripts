@@ -91,7 +91,10 @@ function gc-m {
     param([string]$message)
     & git commit -m $message
 }
-New-Alias -Name gcam -Value 'git commit -am'
+function gc-am {
+    param([string]$message)
+    & git commit -am $message
+}
 New-Alias -Name gpush -Value 'git push'
 New-Alias -Name gstat -Value 'git status'
 function ghash {
