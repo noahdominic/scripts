@@ -12,7 +12,7 @@ and collected over the years.
 
 1. **.vimrc**: I did _not_ write this. I downloaded this years ago, and unfortunately, I've lost the name of the original author.
 1. **.zshrc**: Customises the ZSH environment (prompt design, extensions, &c.) to my liking.
-2. **Microsoft.PowerShell_profile.ps1**: [_NOTE: `gcm` (`git commit -m`) requires `Remove-Alias`, which PowerShell 6.0+._] Customises PowerShell in my Windows systems.
+2. **Microsoft.PowerShell_profile.ps1**: [_NOTE: `gcm` (`git commit -m`) requires `Remove-Alias` introduced in PowerShell 6.0+._] Customises PowerShell in my Windows systems.
 
 ### Scripts
 
