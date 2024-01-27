@@ -99,8 +99,7 @@ function ga {
         git add $file
     }
 }
-
-New-Alias -Name gadd -Value 'git add'
+New-Alias -Name gadd -Value ga
 function ga. {
     git add .
 }
