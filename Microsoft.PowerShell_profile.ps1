@@ -87,7 +87,7 @@ function ga. {
     git add .
 }
 New-Alias -Name gcommit -Value 'git commit'
-function gcm {
+function gc-m {
     param([string]$message)
     & git commit -m $message
 }
