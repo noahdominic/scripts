@@ -6,7 +6,6 @@
 
 Import-Module posh-git
 
-
 <#
 .SYNOPSIS
    Checks if a specified PowerShell module exists.
@@ -36,6 +35,7 @@ function Check-ModuleExists {
 }
 
 New-Alias -Name checkmod -Value Check-ModuleExists
+
 
 # ============================================================================
 # Functions
