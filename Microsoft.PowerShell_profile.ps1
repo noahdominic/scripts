@@ -111,7 +111,7 @@ function gcm {
     param([string]$message)
     & git commit -m $message
 }
-function gcaam {
+function gcam {
     param([string]$message)
     & git commit -am $message
 }
