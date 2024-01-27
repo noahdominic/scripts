@@ -81,7 +81,25 @@ function sudo {
 # ============================================================================
 
 ## Git
-New-Alias -Name ga -Value 'git add'
+function ga {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$false, ValueFromRemainingArguments=$true)]
+        [string[]]$files = @(".")
+    )
+
+    foreach ($file in $files) {
+        # Check if the file/directory exists
+        if (-not (Test-Path $file)) {
+            Write-Host "File or directory '$file' does not exist." -ForegroundColor Red
+            continue
+        }
+
+        # Execute git add command
+        git add $file
+    }
+}
+
 New-Alias -Name gadd -Value 'git add'
 function ga. {
     git add .
