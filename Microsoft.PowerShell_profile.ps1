@@ -136,6 +136,13 @@ function gm {
     param([string]$branch)
     & git merge $branch
 }
+function gpush {
+    git push
+}
+function gsync {
+    git pull
+    git push
+}
 function gundo {
     git reset HEAD~
 }
