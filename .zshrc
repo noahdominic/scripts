@@ -74,9 +74,14 @@ mkcd() {
 # ============================================================================
 
 ## Shortcut aliases for ls
-alias ls='ls -pG'
-alias ll='ls -lhG'
-alias la='ls -lahG'
+
+# For BSD
+export CLICOLOR=1
+
+ls --color=auto &> /dev/null && alias ls='ls --color=auto' ||
+alias ls='ls -p'
+alias ll='ls -lh'
+alias la='ls -lah'
 
 ## macOS-isms
 if command -v xdg-open >/dev/null 2>&1; then
@@ -197,3 +202,4 @@ export PATH=$PATH:$HOME/gems/bin:/home/noahdominic/.cargo/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/usr/local/opt/bzip2/bin:$PATH"
