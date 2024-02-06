@@ -45,7 +45,8 @@ export PATH=$PATH:$HOME/Applications
 ## Path - 3rd party
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.deno/bin
-
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOBIN
 
 # ============================================================================
 # Functions 
@@ -78,15 +79,10 @@ mkcd() {
 # For BSD
 export CLICOLOR=1
 
-ls --color=auto &> /dev/null && alias ls='ls --color=auto' ||
+ls --color=auto &> /dev/null && alias ls='ls -p --color=auto' ||
 alias ls='ls -p'
-alias ll='ls -lh'
-alias la='ls -lah'
-
-## macOS-isms
-if command -v xdg-open >/dev/null 2>&1; then
-    alias open='xdg-open'
-fi
+alias ll='ls -plh'
+alias la='ls -plah'
 
 ## Windows-isms
 alias cls='clear'
@@ -119,6 +115,7 @@ alias 'cd..'='cd ..'
 # ============================================================================
 
 ## Git
+alias g='git'
 alias ga='git add'
 alias gadd='git add'
 alias ga.='git add .'
@@ -127,6 +124,7 @@ alias gcommit='git commit'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
 alias gpush='git push'
+alias gpull='git pull'
 alias gss='git status'
 alias gstat='git status'
 alias ghash='git hash-object -w'
