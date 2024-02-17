@@ -70,7 +70,8 @@ for image_file in image_files:
         if target_width and original_width > target_width:
             # Calculate new height while maintaining aspect ratio
             target_height = int(original_height * (target_width / original_width))
-            img_resized = img.resize((target_width, target_height), Image.ANTIALIAS)
+            img_resized = img.resize((target_width, target_height),
+                                     Image.LANCZOS)
         else:
             img_resized = img
             
