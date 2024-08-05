@@ -91,6 +91,9 @@ alias ls='ls -p'
 alias ll='ls -plh'
 alias la='ls -plah'
 
+## Aliases for rm
+alias rmall='rm -rf * .*'
+
 ## Windows-isms
 alias cls='clear'
 alias dir='ls -lh'
