@@ -47,6 +47,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.deno/bin
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
+export PATH=$PATH:$HOME/miktex-bin
 
 # ============================================================================
 # Functions 
