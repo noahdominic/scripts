@@ -53,7 +53,7 @@ for file in *.{m4v,mp4,avi,mkv,flv,mov}; do
 
         # Check which conditions the video fits in
         
-        if [ "$bit_rate" -gt 1000000 ]; then
+        if [ "$bit_rate" -gt 1500000 ]; then
             to_compress=true
         fi
 
