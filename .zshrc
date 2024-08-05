@@ -49,6 +49,12 @@ export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
 export PATH=$PATH:$HOME/miktex-bin
 
+## For React Native/Expo/Android
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+
 # ============================================================================
 # Functions 
 # ============================================================================
