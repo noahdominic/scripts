@@ -48,12 +48,14 @@ export PATH=$PATH:$HOME/.deno/bin
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOBIN
 export PATH=$PATH:$HOME/miktex-bin
+export PATH=$PATH:/opt/zig
 
 ## For React Native/Expo/Android
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+export TZ="Asia/Manila"
 
 # ============================================================================
 # Functions 
@@ -94,10 +96,11 @@ alias la='ls -plah'
 ## Aliases for rm
 alias rmall='rm -rf * .*'
 
-## Windows-isms
+## Windows-isms and macOS-isms
 alias cls='clear'
 alias dir='ls -lh'
 alias del='rm'
+alias open='xdg-open'
 
 ## Open .zshrc on nano THEN automatically load it
 alias zshrc='nano ~/.zshrc && source ~/.zshrc'
@@ -217,3 +220,11 @@ PERL5LIB="/home/noahdominic/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PE
 PERL_LOCAL_LIB_ROOT="/home/noahdominic/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/noahdominic/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/noahdominic/perl5"; export PERL_MM_OPT;
+
+# pnpm
+export PNPM_HOME="/home/noahdominic/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
