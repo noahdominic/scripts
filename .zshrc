@@ -122,6 +122,9 @@ fi
 ## Fix for common typos
 alias 'cd..'='cd ..'
 
+## Aliases for flatpak apps
+alias apostrophe="flatpak run org.gnome.gitlab.somas.Apostrophe"
+
 
 # ============================================================================
 # Development - Proj Managemetn
