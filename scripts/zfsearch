@@ -1,0 +1,4 @@
+#fgrep [[bib.whitehatter_rev-anx-gen]] */bin/sh
+
+grep -l  *
+
