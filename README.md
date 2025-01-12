@@ -16,6 +16,8 @@ and collected over the years.
 
 ### Scripts
 
+1. **batcap**: Prints the remaining battery capacity
+1. **p**: Literally just an alias to `cat`
 1. **compi**: Automatically compresses image into different levels. Featured in [Automated Image Compression for Web Development with Python](https://gist.github.com/noahdominic/3c4853bc5b41ff3389b12717caed7f0e).
 1. **compv**: Automatically compresses videos for low data transfers. See docs in file.
 1. **journey**: Submodule to [Journey](https://github.com/noahdominic/journey), a BASH-enabled journal/diary system.
@@ -27,6 +29,7 @@ and collected over the years.
 1. **json2csv**: Automatically converts JSONs to CSVs, if compatible. Really unstable.
 1. **mkfile**: `touch` with support for directories
 1. **ts2mp4**: Converts all TSs in the current directory and converts them to MP4.
+
 
 > Notes:
 >
