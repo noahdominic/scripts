@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+    EDITOR="vim"
+    "$EDITOR" $(zknow)
+elif [ $# -eq 1 ]; then
+    echo $@ > $(zknow)
+else
+    echo "Usage: zkfnew [Zettel main subject]"
+fi
+

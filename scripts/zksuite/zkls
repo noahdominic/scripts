@@ -1,0 +1,28 @@
+#!/bin/sh
+
+generate_toc() {
+    local dir="$1"
+    local indent="$2"
+
+    # Loop through each item in the directory
+    for item in "$dir"/*; do
+        if [ -d "$item" ]; then
+            # If the item is a directory, print its name without indentation
+            echo "${indent}$(basename "$item")"
+            # Recursively call the function for the subdirectory with increased indentation
+            generate_toc "$item" "  $indent"
+        elif [ -f "$item" ]; then
+            # If the item is a file, extract the first line
+            first_line=$(head -n 1 "$item" 2>/dev/null || echo "No content")
+            # Get the file name only
+            file_name=$(basename "$item")
+            # Print the formatted entry with dots and the file name
+            printf "%s%s %s %s\n" "$indent" "$first_line" "$(printf '%.0s.' $(seq 1 $((50 - ${#first_line} - ${#file_name}))))" "$file_name"
+        fi
+    done
+}
+
+# Main script execution starts here
+# Default directory is the current one if not provided
+start_dir="${1:-.}"
+generate_toc "$start_dir" ""

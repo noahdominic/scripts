@@ -1,0 +1,73 @@
+!/bin/sh
+
+# zkprint - POSIX-compliant script to include referenced files in double square brackets [[path]],
+# only if the reference is the only content on the line (ignoring whitespace).
+# Handles recursion, whitespace, and edge cases robustly.
+
+# Initialize processed files and recursion depth
+PROCESSED_FILES=""
+MAX_DEPTH=10
+RECURSION_DEPTH=0
+
+zkprint() {
+  file="$1"
+
+  # Check if the file exists
+  if [ ! -f "$file" ]; then
+    echo "Error: File '$file' not found!" >&2
+    return 1
+  fi
+
+  # Prevent recursive inclusion
+  if echo "$PROCESSED_FILES" | grep -q "^$file$"; then
+    echo "Error: Recursive inclusion of '$file' detected!" >&2
+    return 1
+  fi
+
+  # Track the processed file
+  PROCESSED_FILES="$PROCESSED_FILES\n$file"
+
+  # Check recursion depth
+  if [ "$RECURSION_DEPTH" -ge "$MAX_DEPTH" ]; then
+    echo "Error: Maximum inclusion depth ($MAX_DEPTH) exceeded!" >&2
+    return 1
+  fi
+
+  # Increment recursion depth
+  RECURSION_DEPTH=$((RECURSION_DEPTH + 1))
+
+  # Read the file line by line
+  while IFS= read -r line || [ -n "$line" ]; do
+    # Trim leading and trailing whitespace from the line
+    trimmed_line=$(echo "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+    # Check if the line matches [[...]] and contains nothing else
+    if echo "$trimmed_line" | grep -qE '^(\[\[[^]]+\]\])$'; then
+      # Extract the file path inside the brackets
+      ref_file=$(echo "$trimmed_line" | sed 's/^\[\[\(.*\)\]\]$/\1/')
+
+      # Include the referenced file if it exists
+      if [ -f "$ref_file" ]; then
+        echo "    file_name: $ref_file"
+        zkprint "$ref_file"
+      else
+        echo "Error: Referenced file '$ref_file' not found!" >&2
+      fi
+    else
+      # Print the current line as is
+      echo "$line"
+    fi
+  done < "$file"
+
+  # Decrement recursion depth after processing
+  RECURSION_DEPTH=$((RECURSION_DEPTH - 1))
+}
+
+# Entry point: check arguments
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <filename>"
+  exit 1
+fi
+
+# Call zkprint with the given file
+zkprint "$1"
